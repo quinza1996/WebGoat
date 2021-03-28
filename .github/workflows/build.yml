@@ -40,7 +40,7 @@ jobs:
         run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar
         
       - name: Start Docker
-        run: docker-compose up --build
+        run: docker-compose up --build -d
       - name: OWASP ZAP Full Scan
         uses: zaproxy/action-full-scan@v0.2.0
         with:
