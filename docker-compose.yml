@@ -2,7 +2,9 @@ version: '3'
 
 services:
   webgoat:
-    image: webgoat/webgoat-8.0
+    build:
+      dockerfile: docker/Dockerfile
+      context: webgoat-container
     environment:
       - WEBWOLF_HOST=webwolf
       - WEBWOLF_PORT=9090
@@ -14,7 +16,9 @@ services:
       - .:/home/webgoat/.webgoat
     working_dir: /home/webgoat
   webwolf:
-    image: webgoat/webwolf
+    build:
+      dockerfile: webwolf/Dockerfile
+      context: webwolf
     ports:
       - "9090:9090"
     command: --spring.datasource.url=jdbc:hsqldb:hsql://webgoat:9001/webgoat --server.address=0.0.0.0
